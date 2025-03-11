@@ -31,6 +31,9 @@ ynh_script_progression "Adding $app's configuration..."
 mkdir -p $install_dir/smb.conf.d
 ynh_config_add --template="global-smb.conf" --destination="$install_dir/smb.conf.d/0-global.conf"
 ynh_config_add --template="share-smb.conf" --destination="$install_dir/smb.conf.d/share.conf"
+service_name=$(hostname)
+service_name=${service_name:-yunohost}
+ynh_config_add --template="avahi-smb.service" --destination="/etc/avahi/services/smb.service"
 
     cat > $install_dir/smb.conf <<EOF
 # =================================================
